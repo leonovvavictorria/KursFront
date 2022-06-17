@@ -2,6 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://leonovvavictorria.github.io/WebDance/",
   "dependencies": {
     "@chakra-ui/button": "^2.0.2",
     "@chakra-ui/icons": "^2.0.2",
