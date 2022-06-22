@@ -5,7 +5,6 @@ import {
   Stack,
   Heading,
   Divider,
-  Image,
   Center,
   Flex,
   IconButton,
