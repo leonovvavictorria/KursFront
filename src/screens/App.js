@@ -30,14 +30,14 @@ function App() {
       data: 'July 15 - July 24, 2022',
       text: 'Come and join us for 2020 Summer Intensive progran in classical ballet with a comprehensive curriculum',
       isOptionalText: false,
-      link: '/New',
+      link: '/WebDance/new',
     },
     {
       header: 'The School',
       data: 'July 15 - July 24, 2022',
       text: 'The Ouenedit Ballet School offers years round, professional level dance training and dance classes in San Antonio',
       isOptionalText: true,
-      link: '/New2',
+      link: '/WebDance/new2',
     },
   ]
   const dance = [
@@ -96,7 +96,6 @@ function App() {
       </Stack>
       <Flex direction='column'>
         <Center>
-          {/* <Image src={img} alt='Balerina' /> */}
           <Carousel
             data={dance}
             time={20000}

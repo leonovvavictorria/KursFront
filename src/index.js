@@ -15,8 +15,8 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path='/WebDance' element={<App />} />
-          <Route path='/New' element={<New />} />
-          <Route path='/New2' element={<New2 />} />
+          <Route path='/WebDance/new' element={<New />} />
+          <Route path='/WebDance/new2' element={<New2 />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
