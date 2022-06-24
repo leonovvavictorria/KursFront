@@ -1,4 +1,5 @@
 import { Text, Heading, Stack } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 export default function H({ header, data, text, isOptionalText, link }) {
   return (
@@ -7,9 +8,9 @@ export default function H({ header, data, text, isOptionalText, link }) {
       transition='all 0.5s'
       p='1'
       maxW='350px'
-      as='a'
+      as={Link}
       target='_blank'
-      href={link}
+      to={link}
     >
       <Text
         display={isOptionalText ? 'block' : 'none'}
