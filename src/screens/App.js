@@ -1,152 +1,192 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Text,
   Container,
   Stack,
   Heading,
-  Divider,
-  Center,
   Flex,
-  IconButton,
+  Select,
+  Button,
+  Box,
 } from '@chakra-ui/react'
-import { SearchIcon } from '@chakra-ui/icons'
 import '../styles.css'
-import H from '../components/News'
-import Menu from '../components/Menu'
-import img from '../assets/imgs/balet.jpg'
-import img1 from '../assets/imgs/balerina.jpg'
-import img2 from '../assets/imgs/balerina2.jpg'
-import img3 from '../assets/imgs/balerina3.jpg'
-import img4 from '../assets/imgs/balerina4.jpg'
-import img5 from '../assets/imgs/balerina5.jpg'
-import img6 from '../assets/imgs/balerina6.jpg'
-import img7 from '../assets/imgs/balerina7.jpg'
-import { Carousel } from 'react-carousel-minimal'
 
 function App() {
-  const linkstexts = [
-    {
-      header: 'Sumer Intensive 2022',
-      data: 'July 15 - July 24, 2022',
-      text: 'Come and join us for 2020 Summer Intensive progran in classical ballet with a comprehensive curriculum',
-      isOptionalText: false,
-      link: '/WebDance/new',
-    },
-    {
-      header: 'The School',
-      data: 'July 15 - July 24, 2022',
-      text: 'The Ouenedit Ballet School offers years round, professional level dance training and dance classes in San Antonio',
-      isOptionalText: true,
-      link: '/WebDance/new2',
-    },
-  ]
-  const dance = [
-    { image: img },
-    { image: img1 },
-    { image: img2 },
-    { image: img3 },
-    { image: img4 },
-    { image: img5 },
-    { image: img6 },
-    { image: img7 },
-  ]
+  const [colorText, setColorText] = useState('')
+  const [colorId, setColorId] = useState(1)
+  const [memText, setMemText] = useState('')
+
+  function changeColorText(text) {
+    setColorText(text)
+  }
+
+  function changeColorId(e) {
+    resetColorText()
+    setColorId(e.target.value)
+  }
+
+  function resetColorText() {
+    setColorText('')
+  }
+
+  function fetchColorData() {
+    let id = colorId
+
+    let data = {
+      method: 'POST',
+      type: 'cors',
+      body: id,
+    }
+
+    fetch('http://localhost:8000', data)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          changeColorText(result['TEXT'])
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }
+
+  function resetMemText() {
+    setMemText('')
+  }
+
+  function fetchFreeMemoryData() {
+    let id = colorId
+
+    let data = {
+      method: 'GET',
+      type: 'cors',
+    }
+
+    fetch('http://localhost:9000')
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          setMemText(result['TEXT'])
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
+  }
 
   return (
-    <Container bg='pink.200' maxW='700px' paddingTop='10px'>
-      <Flex justifyContent='space-between'>
-        <IconButton
-          colorScheme='pink.200'
-          aria-label='Search database'
-          icon={<SearchIcon color='black' boxSize={10} />}
-          _hover={{ bg: 'pink.100' }}
-          name='search'
-        />
-        <Menu />
-      </Flex>
-      <Stack spacing={3}>
-        <Heading size='3xl' fontFamily='Josefin Sans' paddingTop='20px'>
-          QUENEDIT
-        </Heading>
-        <Heading size='3xl' fontFamily='Josefin Sans'>
-          BALLET
-        </Heading>
-        <Heading size='3xl' paddingBottom='10' fontFamily='Josefin Sans'>
-          SCHOOL
-        </Heading>
-      </Stack>
-      <Stack spacing={3}>
-        <Heading size='1xl' color='blackAlpha.500' fontFamily='Josefin Sans'>
-          Home of Quebedit Dance Theatre
-        </Heading>
-      </Stack>
-      <Divider
-        // orientation='horizontal'
-        borderColor='blackAlpha.500'
-        bg='blackAlpha.300'
-        borderWidth='2px'
-        borderRadius='full'
-      />
-      <Stack spacing={3}>
-        <Heading size='2xl' paddingTop='80px' fontFamily='Josefin Sans'>
-          NOW REGISTERING FOR
-        </Heading>
-        <Heading size='2xl' paddingBottom='10' fontFamily='Josefin Sans'>
-          2020 SUMMER INTENSIVE
-        </Heading>
-      </Stack>
-      <Flex direction='column'>
-        <Center>
-          <Carousel
-            data={dance}
-            time={20000}
-            width='700px'
-            height='500px'
-            // captionStyle={captionStyle}
-            // radius='10px'
-            slideNumber={true}
-            // slideNumberStyle={slideNumberStyle}
-            // captionPosition='bottom'
-            automatic={true}
-            dots={true} // РёРЅРґРёРєР°С‚РѕСЂС‹ РІРЅРёР·Сѓ РєР°СЂС‚РёРЅРѕРє (С‚РѕС‡РєРё)
-            pauseIconColor='white'
-            pauseIconSize='40px'
-            slideBackgroundColor='rgba(202, 200, 185, 1)'
-            slideImageFit='cover' //РЈСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ В«РїРѕРґРіРѕРЅРєСѓ РѕР±СЉРµРєС‚Р°В» РёР·РѕР±СЂР°Р¶РµРЅРёСЏ СЃР»Р°Р№РґРѕРІ,РґРѕСЃС‚СѓРїРЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ В«coverВ» Рё В«containВ»
-            // thumbnails={true} //Р’РєР»СЋС‡Р°РµС‚ РёРЅРґРёРєР°С‚РѕСЂС‹ СЌСЃРєРёР·РѕРІ
-            // thumbnailWidth='100px' //РЁРёСЂРёРЅР° РјРёРЅРёР°С‚СЋСЂС‹, РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ 100 РїРёРєСЃРµР»РµР№.
-            style={{
-              textAlign: 'center',
-              maxWidth: '90vw',
-              maxHeight: '5000px',
-              margin: '40px auto',
-            }}
-          ></Carousel>
-        </Center>
-        <Flex justifyContent='space-between' px='0.5em'>
-          <Text
-            fontSize='xl'
-            color='blackAlpha.500'
+    <Flex>
+      <Container
+        bg='#276749'
+        maxW='600px'
+        paddingTop='10px'
+        marginTop='230px'
+        paddingBottom='5'
+        onClick={resetColorText}
+      >
+        <Stack spacing={3}>
+          <Heading
+            size='lg'
             fontFamily='Josefin Sans'
-            paddingTop='10px'
+            paddingTop='20px'
+            color='#D69E2E'
           >
-            Ballerinas
-          </Text>
-          <Text
-            fontSize='xl'
-            color='blackAlpha.500'
+            ПОМЕНЯЙ
+          </Heading>
+          <Heading size='lg' fontFamily='Josefin Sans' color='#D69E2E'>
+            ЦВЕТ
+          </Heading>
+          <Heading
+            size='lg'
+            paddingBottom='10'
             fontFamily='Josefin Sans'
-            paddingTop='10px'
+            color='#D69E2E'
           >
-            January 14 , 2022
-          </Text>
+            ШРИФТА
+          </Heading>
+        </Stack>
+        <Flex justifyxContent='left' maxW='600px' paddingBottom='2'>
+          <Select
+            bg='#22543D'
+            borderColor='#22543D'
+            maxW='300px'
+            onChange={changeColorId}
+            colorScheme='#D69E2E'
+            color='#D69E2E'
+          >
+            <option defaultValue value='1'>
+              Красный
+            </option>
+            <option value='2'>Черный</option>
+            <option value='3'>Синий</option>
+            <option value='4'>Голубой</option>
+            <option value='5'>Зеленый</option>
+            <option value='6'>Фиолетовый</option>
+            <option value='7'>Белый</option>
+            <option value='8'>Желтый</option>
+          </Select>
+          <Button
+            onClick={fetchColorData}
+            colorScheme='yellow'
+            color='#D69E2E'
+            variant='ghost'
+            marginLeft='1'
+          >
+            Поменять
+          </Button>
         </Flex>
-      </Flex>
-      <Flex paddingTop='35' paddingBottom='10'>
-        {linkstexts.map((e) => (
-          <H key={e.data} {...e} />
-        ))}
-      </Flex>
-    </Container>
+        <Box
+          dangerouslySetInnerHTML={{ __html: colorText }}
+          borderRadius='md'
+          w='300px'
+          bg='#22543d'
+          h='38px'
+        ></Box>
+      </Container>
+      <Container
+        onClick={resetMemText}
+        bg='#D69E2E'
+        maxW='600px'
+        paddingTop='10px'
+        marginTop='230px'
+      >
+        <Stack spacing={3}>
+          <Heading
+            size='lg'
+            fontFamily='Josefin Sans'
+            paddingTop='20px'
+            color='#276749'
+          >
+            УЗНАЙ ОБЪЕМ
+          </Heading>
+          <Heading size='lg' fontFamily='Josefin Sans' color='#276749'>
+            СВОБОДНОЙ
+          </Heading>
+          <Heading
+            size='lg'
+            paddingBottom='10'
+            fontFamily='Josefin Sans'
+            color='#276749'
+          >
+            ФИЗИЧЕСКОЙ ПАМЯТИ
+          </Heading>
+        </Stack>
+        <Flex justifyxContent='left' maxW='600px' paddingBottom='2'>
+          <Button
+            onClick={fetchFreeMemoryData}
+            colorScheme='green'
+            color='#276749'
+            variant='ghost'
+            marginLeft='1'
+          >
+            Узнать
+          </Button>
+        </Flex>
+        <Box borderRadius='md' w='300px' bg='#276749' h='38px'>
+          {memText}
+        </Box>
+      </Container>
+    </Flex>
   )
 }
 

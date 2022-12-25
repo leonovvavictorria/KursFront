@@ -4,8 +4,6 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // Screens
-import New from './screens/New'
-import New2 from './screens/New2'
 import App from './screens/App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
@@ -14,9 +12,7 @@ root.render(
     <ChakraProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='/WebDance' element={<App />} />
-          <Route path='/WebDance/new' element={<New />} />
-          <Route path='/WebDance/new2' element={<New2 />} />
+          <Route path='/Limon' element={<App />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
