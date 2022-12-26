@@ -12,7 +12,7 @@ root.render(
     <ChakraProvider>
       <BrowserRouter>
         <Routes>
-          <Route path='/Limon' element={<App />} />
+          <Route path='' element={<App />} />
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {
   Text,
   Container,
+  Center,
   Stack,
   Heading,
   Flex,
@@ -54,6 +55,10 @@ function App() {
     setMemText('')
   }
 
+  function changeMemText(text) {
+    setMemText((text += '%'))
+  }
+
   function fetchFreeMemoryData() {
     let id = colorId
 
@@ -66,7 +71,7 @@ function App() {
       .then((res) => res.json())
       .then(
         (result) => {
-          setMemText(result['TEXT'])
+          changeMemText(result['TEXT'])
         },
         (error) => {
           console.log(error)
@@ -138,6 +143,7 @@ function App() {
         <Box
           dangerouslySetInnerHTML={{ __html: colorText }}
           borderRadius='md'
+          textAlign='center'
           w='300px'
           bg='#22543d'
           h='38px'
@@ -182,7 +188,14 @@ function App() {
             Узнать
           </Button>
         </Flex>
-        <Box borderRadius='md' w='300px' bg='#276749' h='38px'>
+        <Box
+          textAlign='center'
+          borderRadius='md'
+          w='300px'
+          bg='#276749'
+          h='38px'
+          color='#D69E2E'
+        >
           {memText}
         </Box>
       </Container>
